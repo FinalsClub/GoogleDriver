@@ -23,8 +23,16 @@ module GoogleDriver
     end
 
     def download(type)
-      if @exports.keys.include? type
+      loops = 0
+      if @exports and @exports.keys.include? type
         @api.client.execute(uri: @exports[type]).body
+      else
+        if loops > 5
+          break
+        end
+        loops+=1
+        sleep(5)
+        self.download(type)
       end
     end
   end
