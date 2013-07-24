@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe GooDrive::Api do
+describe GoogleDriver::Api do
 
-  let (:api) { GooDrive::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path']) }
+  let (:api) { GoogleDriver::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path']) }
 
   it "detects the Mime Type of the file to be uploaded" do
     expect(api.detect_mimetype(file_doc)).to eq('application/msword')
@@ -17,7 +17,7 @@ describe GooDrive::Api do
   end
 
   it "should upload a file" do
-    expect(api.upload(file_doc)).to be_kind_of GooDrive::Document
+    expect(api.upload(file_doc)).to be_kind_of GoogleDriver::Document
   end
 
   it "should accept multiple file uploads at once" do

@@ -1,4 +1,4 @@
-module GooDrive
+module GoogleDriver
   class Document
     attr_accessor :exports, :response
 

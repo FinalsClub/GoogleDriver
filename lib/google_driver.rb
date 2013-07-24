@@ -6,8 +6,8 @@
 #
 ####
 
-module GooDrive
-  require 'goo_drive/version'
-  require 'goo_drive/api'
-  require 'goo_drive/document'
+module GoogleDriver
+  require 'google_driver/version'
+  require 'google_driver/api'
+  require 'google_driver/document'
 end

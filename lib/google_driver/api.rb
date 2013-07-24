@@ -1,6 +1,6 @@
 require 'google/api_client'
 
-module GooDrive
+module GoogleDriver
   class Api
     attr_accessor :client, :drive
 

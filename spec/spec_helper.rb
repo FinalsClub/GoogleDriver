@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'yaml'
 require 'rspec/core/shared_context'
-require "goo_drive"
+require "google_driver"
 
 RSpec.configure do |config|
   config.order = 'random'

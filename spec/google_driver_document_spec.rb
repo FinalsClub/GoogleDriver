@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe GooDrive::Document do
-  let (:api) { GooDrive::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path']) }
+describe GoogleDriver::Document do
+  let (:api) { GoogleDriver::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path']) }
   let (:doc) { api.upload(file_doc) }
 
   it "should have an exports hash with 1 or more keys" do
