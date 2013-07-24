@@ -13,7 +13,7 @@ module GoogleDriver
     end
 
     def google_authorize
-      @client = Google::APIClient.new(application_name:"GooDrive", application_version:VERSION)
+      @client = Google::APIClient.new(application_name:"GoogleDriver", application_version:VERSION)
       @drive = @client.discovered_api('drive', 'v2')
 
       # Create a new server<>server based API client
