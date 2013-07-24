@@ -4,7 +4,7 @@ GoogleDriver
 A ruby gem for processing word and other common document formats to html using google drive's api
 
 ## Using this gem
-### GooDrive::Api
+### GoogleDriver::Api
 
 The api object needs three values to be initalized:
 
@@ -14,7 +14,7 @@ The api object needs three values to be initalized:
     
 ----
 
-    api = GooDrive::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path'])
+    api = GoogleDriver::Api.new(PRIVATE['scope'], PRIVATE['issuer'], PRIVATE['p12_path'])
 
 #### Usage
 
@@ -23,7 +23,7 @@ The api object needs three values to be initalized:
     docs = api.upload_files(['./path/to/fileA', './path/to/fileB', './path/to/fileC'])
     # => [Document(FileA), Document(FileB), Document(FileC)]
 
-### GooDrive::Document
+### GoogleDriver::Document
 
 Document instances are emitted by `api.upload()` and represent a document uploaded to Google Drive. 
 The Document can be exported from Google in a number of export formats depending on the original filetype.
