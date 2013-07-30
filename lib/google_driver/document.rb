@@ -1,38 +1,46 @@
 module GoogleDriver
   class Document
-    attr_accessor :exports, :response
+    attr_accessor :exports, :response, :file_id
 
     def initialize(response, api)
-      @response = response
-      @exports = response.data.to_hash['exportLinks']
       @api = api
+      @drive = get_drive_api
+
+      @response = response
+      @file_id = response.data.to_hash['id']
+      @exports = response.data.to_hash['exportLinks']
     end
 
-    # Do we want mimetypes as getters?
-    # doc.application/pdf doesn't sound like a good getter to me
-    def make_getters(*links)
-      class << self
-        links.each do |link|
-          attr_reader link.intern
-        end
-      end
+    # refresh document information
+    # used when we don't immediate get exportLinks in the response
+    def update
+      response = @api.client.execute(
+          api_method: @drive.files.get,
+          :parameters => { 'fileId' => @file_id }
+          )
+      @response = response
+      @file_id = response.data.to_hash['id']
+      @exports = response.data.to_hash['exportLinks']
     end
 
     def list
       @exports.keys
     end
 
+    def get_drive_api
+      @drive = @api.client.discovered_api('drive', 'v2')
+    end
+
     def download(type)
       loops = 0
-      if @exports and @exports.keys.include? type
-        @api.client.execute(uri: @exports[type]).body
-      else
-        if loops > 5
-          break
+      while loops < 5 do
+        self.update()
+        if @exports and @exports.keys.include?(type)
+          return @api.client.execute(uri: @exports[type]).body
+        else
+          loops+=1
+          sleep(5*loops) # Wait an increasing amount of time between loops
         end
-        loops+=1
-        sleep(5)
-        self.download(type)
       end
     end
   end
